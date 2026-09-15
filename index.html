@@ -460,7 +460,7 @@ ul,ol{margin:0;padding:0;list-style:none}
       <a href="#paquetes">Paquetes</a>
       <a href="#menu">Menú</a>
     </nav>
-    <a class="btn btn--primary nav__cta" href="https://wa.me/50763608156" target="_blank" rel="noopener noreferrer">Cotizar</a>
+    <a class="btn btn--primary nav__cta" data-quote href="https://wa.me/50763608156" target="_blank" rel="noopener noreferrer">Cotizar</a>
   </div>
 </header>
 
@@ -601,7 +601,7 @@ ul,ol{margin:0;padding:0;list-style:none}
         </p>
 
         <div class="final__actions">
-          <a class="btn btn--ink" href="https://wa.me/50763608156" target="_blank" rel="noopener noreferrer">Solicitar cotización</a>
+          <a class="btn btn--ink" data-quote href="https://wa.me/50763608156" target="_blank" rel="noopener noreferrer">Solicitar cotización</a>
           <p class="final__channel">WhatsApp 6360-8156</p>
         </div>
       </div>
@@ -633,7 +633,7 @@ ul,ol{margin:0;padding:0;list-style:none}
       </div>
       <div>
         <dt>Cotizaciones</dt>
-        <dd><a href="https://wa.me/50763608156" target="_blank" rel="noopener noreferrer">WhatsApp 6360-8156</a></dd>
+        <dd><a data-quote href="https://wa.me/50763608156" target="_blank" rel="noopener noreferrer">WhatsApp 6360-8156</a></dd>
       </div>
       <div>
         <dt>Web</dt>
@@ -654,7 +654,7 @@ ul,ol{margin:0;padding:0;list-style:none}
     <p class="tray__count"><b id="tray-n">0</b> <span>de <span id="tray-total">6</span> elegidos</span></p>
     <div class="tray__bars" id="tray-bars" aria-hidden="true"></div>
     <p class="tray__msg" id="tray-msg"></p>
-    <a class="btn btn--ink tray__cta" href="https://wa.me/50763608156" target="_blank" rel="noopener noreferrer">Cotizar</a>
+    <a class="btn btn--ink tray__cta" data-quote href="https://wa.me/50763608156" target="_blank" rel="noopener noreferrer">Enviar mi mesa</a>
   </div>
 </div>
 
@@ -1069,6 +1069,41 @@ ul,ol{margin:0;padding:0;list-style:none}
   })
 
   /* =======================================================
+     El mensaje de WhatsApp
+     Se redacta solo con lo que la persona lleva elegido, para
+     que al restaurante le llegue la mesa ya escrita y no un
+     "hola, información". Los href del HTML son wa.me pelado:
+     si el JS no corre, los botones siguen sirviendo.
+     ======================================================= */
+  const WA = '50763608156'
+
+  function buildMessage() {
+    const p = pack()
+    const out = ['Hola, quiero cotizar el Menú Navideño de Tío Navaja.', '']
+    out.push(`Pack $${p.price} · ${p.name}`)
+
+    const pending = []
+    COURSES.forEach(c => {
+      const chosen = picked[c.id]
+      const max = allowance(c.id)
+      if (chosen.length) {
+        out.push('', (chosen.length === 1 ? c.one : c.many).toUpperCase())
+        chosen.forEach(id => out.push(`- ${DISHES.find(d => d.id === id).name}`))
+      }
+      if (chosen.length < max) pending.push(label(c, max - chosen.length))
+    })
+
+    if (pending.length) out.push('', `Me falta elegir: ${pending.join(', ')}.`)
+    out.push('', 'Incluye tamal y rosca navideña.')
+    return out.join('\n')
+  }
+
+  function updateQuoteLinks() {
+    const href = `https://wa.me/${WA}?text=${encodeURIComponent(buildMessage())}`
+    document.querySelectorAll('[data-quote]').forEach(a => { a.href = href })
+  }
+
+  /* =======================================================
      Bandeja y estado
      ======================================================= */
   const tray = document.getElementById('tray')
@@ -1113,7 +1148,10 @@ ul,ol{margin:0;padding:0;list-style:none}
     if (lastMsg) trayMsg.innerHTML = lastMsg
     else if (n === 0) trayMsg.textContent = ''
     else if (n < max) trayMsg.innerHTML = `Te faltan <b>${max - n}</b> para completar el pack $${pack().price}.`
-    else trayMsg.innerHTML = `Mesa completa. Mándanosla por WhatsApp y te cotizamos.`
+    else trayMsg.innerHTML = `Mesa completa. El mensaje ya va escrito: solo dale enviar.`
+
+    // El mensaje se rehace en cada cambio de pack o de plato
+    updateQuoteLinks()
 
     // Pie de los paquetes
     packsHint.innerHTML = `Vas con el <strong>Pack $${pack().price} — ${pack().name}</strong>: ` +

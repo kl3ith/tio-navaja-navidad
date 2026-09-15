@@ -16,8 +16,10 @@ mismas tipografías y los mismos activos de marca.
 
 ## Qué se toca
 
-**El contacto.** Está como `https://wa.me/50763608156` en los cuatro botones
-y en el pie. Buscar y reemplazar si cambia.
+**El contacto.** El número vive en dos sitios: como `const WA` en el script
+(de ahí sale el mensaje armado) y como `href` de los cuatro botones en el
+HTML, que son el respaldo por si el JS no corre. Buscar `50763608156` y
+reemplazar en todos.
 
 **Los packs.** En el bloque `const PACKS`: precio, nombre y cuántas opciones
 entran por tiempo. Cambiar un número recalcula solo los contadores, la
@@ -25,6 +27,38 @@ bandeja y los avisos.
 
 **Los platos.** En `const DISHES`. Cada uno lleva `course` (entrada,
 especialidad, guarnicion, postre) y `art`, que es el motivo ilustrado.
+
+## El mensaje de WhatsApp
+
+Los cuatro botones de cotización (barra, bandeja, cierre y pie) llevan
+`data-quote`. En cada cambio de pack o de plato, `updateQuoteLinks()` les
+reescribe el `href` con el mensaje ya redactado, así que a Tío Navaja no le
+llega un "hola, información" sino la mesa completa:
+
+```
+Hola, quiero cotizar el Menú Navideño de Tío Navaja.
+
+Pack $50 · La mesa de Nochebuena
+
+ENTRADA
+- Canoas de Tamal de Olla con Pork Belly
+
+ESPECIALIDADES
+- Pernil de Cerdo al Horno Glaseado con Piña y Especias
+- Pavo al Horno con Relleno Criollo
+
+...
+
+Incluye tamal y rosca navideña.
+```
+
+Si la selección va a medias, cierra con una línea de lo que falta
+("Me falta elegir: 2 guarniciones, 1 postre."), que le sirve al
+restaurante para saber por dónde seguir la conversación.
+
+El texto se arma en `buildMessage()`. Los `href` del HTML son `wa.me`
+pelado a propósito: si el JS no corre, los botones siguen funcionando,
+solo que sin mensaje.
 
 ## Las fotografías
 
