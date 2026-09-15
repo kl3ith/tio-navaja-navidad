@@ -1,0 +1,1125 @@
+<title>Menú Navideño Tío Navaja</title>
+
+<style>
+/* =========================================================
+   TÍO NAVAJA · Menú Navideño
+   Misma identidad que el brochure corporativo: los tokens
+   salen de tokens.css y los activos de la carpeta de marca.
+   El giro navideño lo pone la BOMBILLA de la casa, convertida
+   en guirnalda — no hay un solo copo de nieve: esto es
+   Navidad en el trópico.
+   ========================================================= */
+@font-face{font-family:'Chrone';src:url('fonts/chrone.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:'DM Sans';src:url('fonts/dmsans-var.woff2') format('woff2-variations');font-weight:100 1000;font-style:normal;font-display:swap}
+@font-face{font-family:'Michigan Signature';src:url('fonts/michigan.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}
+
+:root{
+  --night:#101021; --night-soft:#191930;
+  --petrol:#004c45; --petrol-deep:#00312c; --petrol-soft:#0a655b;
+  --wine:#8a1e40; --wine-deep:#4e1024;
+  --orange:#ff8040; --pink:#f5abb8;
+  --cream:#f3efe4; --cream-dim:#cdc6b6; --cream-faint:#9a9384;
+
+  /* Dorado DE TEMPORADA: no entra al manual, vive solo en la
+     campaña de diciembre. Es el metálico que todo sistema
+     navideño necesita y que la paleta base no tenía. */
+  --gold:#e3b25b; --gold-deep:#b8893c; --gold-soft:#f0d9a8;
+
+  --bg:var(--night); --fg:var(--cream); --fg-muted:var(--cream-dim); --fg-faint:var(--cream-faint);
+  --accent:var(--orange);
+  --rule:rgba(243,239,228,.2); --rule-strong:rgba(243,239,228,.42); --focus:var(--orange);
+
+  --font-display:'Chrone','Times New Roman',serif;
+  --font-sans:'DM Sans',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  --font-script:'Michigan Signature','Bradley Hand',cursive;
+
+  --step--1:clamp(.8rem,.77rem + .15vw,.88rem);
+  --step-0:clamp(1rem,.96rem + .2vw,1.09rem);
+  --step-1:clamp(1.2rem,1.1rem + .5vw,1.45rem);
+  --step-2:clamp(1.5rem,1.3rem + 1vw,2.05rem);
+  --step-3:clamp(1.95rem,1.6rem + 1.8vw,3rem);
+  --step-4:clamp(2.6rem,1.9rem + 3.4vw,4.6rem);
+  --step-5:clamp(3.4rem,2rem + 6.4vw,7.5rem);
+
+  --space-3xs:.25rem; --space-2xs:.5rem; --space-xs:.75rem; --space-s:1rem;
+  --space-m:1.5rem; --space-l:2.5rem; --space-xl:4rem; --space-2xl:6rem;
+
+  --maxw:1240px; --gutter:clamp(1.15rem,4vw,3.5rem); --tap:44px;
+  --dur-fast:140ms; --dur:240ms; --dur-slow:420ms; --ease:cubic-bezier(.22,.61,.36,1);
+
+  --grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.86' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='0.42'/%3E%3C/svg%3E");
+}
+
+/* Color por tiempo, dentro de la paleta de la casa */
+[data-course='entrada']{--course-bg:var(--petrol);--course-deep:var(--petrol-deep);--course-pop:var(--pink)}
+[data-course='especialidad']{--course-bg:var(--wine);--course-deep:var(--wine-deep);--course-pop:var(--pink)}
+[data-course='guarnicion']{--course-bg:var(--petrol-soft);--course-deep:var(--petrol-deep);--course-pop:var(--cream)}
+[data-course='postre']{--course-bg:var(--orange);--course-deep:var(--wine-deep);--course-pop:var(--wine-deep)}
+
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:5rem;-webkit-text-size-adjust:100%}
+body{
+  margin:0;background-color:var(--bg);color:var(--fg);
+  font-family:var(--font-sans);font-size:var(--step-0);line-height:1.6;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;
+}
+body::before{
+  content:'';position:fixed;inset:0;background-image:var(--grain);
+  opacity:.045;pointer-events:none;z-index:9999;mix-blend-mode:overlay;
+}
+h1,h2,h3,h4{font-family:var(--font-display);font-weight:400;line-height:1.04;letter-spacing:.005em;margin:0;text-wrap:balance}
+p{margin:0;text-wrap:pretty}
+img,svg{max-width:100%;display:block}
+button{font:inherit;color:inherit;cursor:pointer}
+a{color:inherit}
+ul,ol{margin:0;padding:0;list-style:none}
+:focus-visible{outline:3px solid var(--focus);outline-offset:3px;border-radius:2px}
+
+.u-wrap{width:100%;max-width:var(--maxw);margin-inline:auto;padding-inline:var(--gutter)}
+.u-sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0}
+.u-kicker{font-family:var(--font-sans);font-size:var(--step--1);font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:var(--fg-muted)}
+.u-script{font-family:var(--font-script);font-weight:400;letter-spacing:0;text-transform:none}
+.u-skip{position:absolute;left:var(--space-s);top:-100px;z-index:10000;background:var(--orange);color:var(--night);padding:.75rem 1.25rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;transition:top var(--dur-fast) var(--ease)}
+.u-skip:focus{top:var(--space-s)}
+
+/* ── Botones ─────────────────────────────────────────────── */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:.6em;
+  min-height:var(--tap);padding:.85rem 1.6rem;border:2px solid transparent;border-radius:0;
+  font-family:var(--font-sans);font-size:var(--step--1);font-weight:700;letter-spacing:.16em;
+  text-transform:uppercase;text-decoration:none;text-align:center;
+  transition:background-color var(--dur) var(--ease),color var(--dur) var(--ease),border-color var(--dur) var(--ease),transform var(--dur-fast) var(--ease);
+}
+.btn--primary{background:var(--orange);color:var(--night);border-color:var(--orange)}
+.btn--ghost{background:transparent;color:var(--cream);border-color:var(--rule-strong)}
+.btn--ink{background:var(--night);color:var(--cream);border-color:var(--night)}
+@media (hover:hover){
+  .btn--ghost:hover{background:var(--cream);color:var(--night);border-color:var(--cream)}
+  .btn--ink:hover{background:var(--wine);border-color:var(--wine)}
+}
+.btn:active{transform:translateY(1px)}
+
+/* ── Patrones de la casa ─────────────────────────────────── */
+.pattern{
+  position:absolute;inset:0;pointer-events:none;
+  background-color:var(--pattern-ink,var(--cream));
+  opacity:var(--pattern-alpha,.1);
+  -webkit-mask-repeat:repeat;mask-repeat:repeat;
+  -webkit-mask-size:var(--pattern-size,96px);mask-size:var(--pattern-size,96px);
+}
+.pattern--palmera{-webkit-mask-image:url('brand/motivo-palmera.png');mask-image:url('brand/motivo-palmera.png')}
+.pattern--atomo{-webkit-mask-image:url('brand/motivo-atomo.png');mask-image:url('brand/motivo-atomo.png')}
+.pattern--bombilla{-webkit-mask-image:url('brand/motivo-bombilla.png');mask-image:url('brand/motivo-bombilla.png')}
+@supports not ((-webkit-mask-image:url('')) or (mask-image:url(''))){.pattern{display:none}}
+
+/* ── La guirnalda ────────────────────────────────────────
+   La bombilla de la marca, ahora encendida de verdad: cada
+   bombillo es un elemento con su vidrio, su casquillo y su
+   halo, y titila en su propio tiempo. Se arma en JS para que
+   el número de vanos se ajuste al ancho. */
+.garland{
+  position:absolute;left:0;right:0;top:0;height:68px;
+  display:flex;overflow:hidden;pointer-events:none;z-index:2;
+}
+.swag{position:relative;flex:0 0 118px;height:68px}
+.swag svg{display:block;width:118px;height:44px}
+.swag path{fill:none;stroke:var(--wire,rgba(243,239,228,.5));stroke-width:2.5;stroke-linecap:round}
+.bulb{
+  position:absolute;left:50%;top:30px;width:15px;height:21px;margin-left:-7.5px;
+  border-radius:48% 48% 52% 52% / 38% 38% 62% 62%;
+  background:var(--b);
+  box-shadow:0 0 10px 1px var(--b), 0 0 26px 6px var(--b-glow);
+  animation:bulb-twinkle 3.2s ease-in-out infinite;
+}
+.bulb::before{
+  content:'';position:absolute;left:50%;top:-7px;margin-left:-3px;
+  width:6px;height:7px;border-radius:1px 1px 0 0;
+  background:var(--wire,rgba(243,239,228,.5));
+}
+@keyframes bulb-twinkle{0%,100%{opacity:1}50%{opacity:.42}}
+/* Sobre fondo claro el cable se oscurece y el vidrio no irradia */
+.garland[data-tone='light']{--wire:rgba(78,16,36,.42)}
+.garland[data-tone='light'] .bulb{box-shadow:none;animation:none}
+
+/* ── El adorno: la bombilla de la casa, suelta y encendida ──
+   El motivo de la marca ya viene dibujado con sus rayos de
+   luz. Suelto, en dorado y con halo, es el adorno colgado.
+   (El átomo se probó y a este tamaño desaparece: 17 % de
+   trazo sobre el lienzo no aguanta 40 px.) */
+.spark{
+  position:absolute;pointer-events:none;z-index:2;
+  background-color:var(--gold);
+  -webkit-mask-image:url('brand/motivo-bombilla.png');mask-image:url('brand/motivo-bombilla.png');
+  -webkit-mask-size:contain;mask-size:contain;
+  -webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;
+  filter:drop-shadow(0 0 12px rgba(227,178,91,.55));
+  opacity:.42;animation:spark-pulse 5s ease-in-out infinite;
+}
+@keyframes spark-pulse{0%,100%{opacity:.34;transform:scale(.94) rotate(var(--tilt,0deg))}50%{opacity:.88;transform:scale(1.05) rotate(var(--tilt,0deg))}}
+@supports not ((-webkit-mask-image:url('')) or (mask-image:url(''))){.spark{display:none}}
+
+/* ── Navegación ──────────────────────────────────────────── */
+.nav{
+  position:sticky;top:0;z-index:60;background:var(--night);
+  border-bottom:1px solid var(--rule);
+}
+.nav__inner{display:flex;align-items:center;gap:var(--space-m);min-height:4.25rem}
+.nav__logo{width:clamp(108px,20vw,168px);height:auto}
+.nav__links{display:none;gap:var(--space-m);margin-left:auto}
+.nav__links a{
+  font-size:var(--step--1);font-weight:600;letter-spacing:.18em;text-transform:uppercase;
+  text-decoration:none;color:var(--cream-dim);padding-block:.35rem;
+  border-bottom:2px solid transparent;transition:color var(--dur) var(--ease),border-color var(--dur) var(--ease);
+}
+@media (hover:hover){.nav__links a:hover{color:var(--cream);border-color:var(--orange)}}
+.nav__cta{margin-left:auto;padding:.6rem 1.05rem;font-size:.7rem}
+@media (min-width:880px){
+  .nav__links{display:flex}
+  .nav__cta{margin-left:0}
+}
+
+/* ── Portada ─────────────────────────────────────────────── */
+.cover{
+  position:relative;overflow:hidden;
+  /* La luz de la mesa: un foco cálido tras el Tío y un rescoldo
+     dorado arriba a la izquierda. Sin esto el verde queda plano. */
+  background:
+    radial-gradient(116% 76% at 70% 58%, rgba(255,128,64,.32), rgba(255,128,64,0) 62%),
+    radial-gradient(84% 62% at 14% 12%, rgba(227,178,91,.18), rgba(227,178,91,0) 68%),
+    var(--petrol);
+  padding-block:calc(var(--space-l) + 54px) 0;
+}
+.cover::after{
+  content:'';position:absolute;inset:0;pointer-events:none;z-index:1;
+  background:radial-gradient(128% 96% at 50% 38%, rgba(0,49,44,0) 42%, rgba(0,49,44,.6));
+}
+.cover__pattern{--pattern-ink:var(--cream);--pattern-alpha:.1;--pattern-size:clamp(96px,14vw,140px);z-index:0}
+.cover__inner{position:relative;z-index:3;display:grid;gap:var(--space-m);padding-bottom:var(--space-xl)}
+.cover__eyebrow{display:flex;align-items:center;gap:.75rem;margin-bottom:var(--space-m);color:var(--pink)}
+.cover__eyebrow::after{content:'';flex:1;height:1px;background:var(--rule)}
+.cover__title{margin-bottom:var(--space-xs)}
+.cover__mark{width:min(62%,13.5rem);height:auto;margin-bottom:var(--space-s);opacity:.95}
+/* Chrone es unicase: 'Navidad' se dibuja en capitales. */
+.cover__navidad{
+  display:block;font-family:var(--font-display);font-weight:400;
+  font-size:clamp(3.5rem,13.5vw,8.6rem);line-height:.84;letter-spacing:-.008em;
+  color:var(--gold);
+  text-shadow:0 0 30px rgba(227,178,91,.45), 0 0 84px rgba(255,128,64,.3);
+}
+.cover__lede{
+  font-family:var(--font-sans);font-size:var(--step-0);font-weight:700;letter-spacing:.32em;
+  text-transform:uppercase;color:var(--cream);
+  border-top:1px solid rgba(227,178,91,.42);border-bottom:1px solid rgba(227,178,91,.42);
+  padding-block:.55rem;margin-bottom:var(--space-m);
+}
+.cover__quote{
+  position:relative;font-family:var(--font-sans);font-weight:300;font-size:var(--step-2);
+  line-height:1.34;color:var(--cream);max-width:24ch;margin-bottom:var(--space-l);padding-left:.55em;
+}
+.cover__quote-mark{font-size:2.4em;line-height:0;color:var(--gold);position:absolute;left:-.06em;top:.42em}
+.cover__actions{display:flex;flex-wrap:wrap;gap:var(--space-xs);margin-bottom:var(--space-m)}
+.cover__meta{font-size:var(--step--1);color:var(--cream-dim);letter-spacing:.08em}
+.cover__art{position:relative;display:flex;justify-content:center;align-items:flex-end;min-height:clamp(280px,62vw,420px)}
+.cover__art::before{
+  content:'';position:absolute;left:50%;top:46%;transform:translate(-50%,-50%);
+  width:min(115%,30rem);aspect-ratio:1;border-radius:50%;
+  background:radial-gradient(circle, rgba(255,175,110,.34), rgba(255,175,110,0) 66%);
+  pointer-events:none;
+}
+.cover__tio{position:relative;width:clamp(190px,46vw,300px);height:auto;filter:drop-shadow(14px 16px 0 rgba(0,49,44,.55))}
+.cover__emc{position:absolute;right:0;top:0;width:clamp(96px,23vw,150px);height:auto;opacity:.8;transform:rotate(-8deg)}
+.cover__ticker{position:relative;border-block:1px solid rgba(243,239,228,.24);background:var(--wine);overflow:hidden;padding-block:.7rem}
+.cover__ticker-track{
+  display:flex;width:max-content;gap:1rem;white-space:nowrap;
+  font-size:var(--step--1);font-weight:600;letter-spacing:.3em;text-transform:uppercase;color:var(--cream);
+  animation:cover-marquee 30s linear infinite;
+}
+.cover__ticker-track i{color:var(--gold);font-style:normal}
+@keyframes cover-marquee{to{transform:translateX(-50%)}}
+@media (min-width:900px){
+  .cover{padding-top:calc(var(--space-xl) + 40px)}
+  .cover__inner{grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr);align-items:center;gap:var(--space-xl);padding-bottom:var(--space-2xl)}
+  .cover__art{min-height:clamp(440px,42vw,580px)}
+  .cover__tio{width:clamp(260px,26vw,360px)}
+}
+
+/* ── Lo que viene incluido ───────────────────────────────── */
+.incl{position:relative;background:var(--cream);color:var(--wine-deep);padding-block:calc(var(--space-l) + 34px) var(--space-l);overflow:hidden}
+.incl__pattern{--pattern-ink:var(--wine);--pattern-alpha:.07;--pattern-size:clamp(70px,10vw,100px)}
+.incl__inner{position:relative;z-index:3;display:grid;gap:var(--space-m);align-items:center}
+/* El sello: lo que va incluido es un regalo, y un regalo lleva sello */
+.seal{
+  position:absolute;right:var(--gutter);top:88px;z-index:4;display:grid;place-items:center;
+  width:clamp(84px,17vw,112px);aspect-ratio:1;border-radius:50%;
+  background:var(--wine);color:var(--gold);border:2px solid var(--gold);
+  box-shadow:0 0 0 5px var(--cream);transform:rotate(-9deg);
+  font-size:clamp(.54rem,1.5vw,.64rem);font-weight:700;letter-spacing:.16em;
+  text-transform:uppercase;text-align:center;line-height:1.4;padding:.5rem;
+}
+.incl__head .u-kicker{color:var(--wine)}
+.incl__title{font-size:var(--step-3);text-transform:uppercase;margin-block:var(--space-2xs) var(--space-2xs);color:var(--wine-deep)}
+.incl__title em{font-style:normal;color:var(--gold-deep)}
+.incl__sub{max-width:46ch;color:#6b5f52}
+.incl__items{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--space-s)}
+.incl__item{display:grid;gap:.6rem;justify-items:center;text-align:center}
+.incl__item svg{width:100%;height:auto;aspect-ratio:1;background:var(--petrol);border:2px solid var(--gold)}
+.incl__name{font-family:var(--font-display);font-size:var(--step-1);text-transform:uppercase;line-height:1.1}
+.incl__note{font-size:var(--step--1);color:#6b5f52}
+@media (min-width:820px){
+  .incl__inner{grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:var(--space-xl)}
+}
+
+/* ── Paquetes ────────────────────────────────────────────── */
+.packages{
+  position:relative;overflow:hidden;
+  background:
+    radial-gradient(92% 62% at 50% 0%, rgba(227,178,91,.16), rgba(227,178,91,0) 64%),
+    var(--wine);
+  padding-block:calc(var(--space-xl) + 34px) var(--space-xl);
+}
+.packages__pattern{--pattern-ink:var(--night);--pattern-alpha:.12;--pattern-size:clamp(84px,12vw,120px)}
+.packages__inner{position:relative;z-index:3}
+.packages__head{margin-bottom:var(--space-l)}
+.packages__title{font-size:var(--step-4);text-transform:uppercase;margin-block:var(--space-2xs) var(--space-xs)}
+.packages__sub{max-width:44ch;color:var(--cream-dim)}
+.packages__grid{display:grid;gap:var(--space-m)}
+.pkg{
+  position:relative;display:grid;gap:var(--space-xs);
+  padding:var(--space-m) var(--space-s);text-align:left;
+  background:var(--wine-deep);border:1px solid var(--rule);color:var(--cream);overflow:hidden;
+  transition:background-color var(--dur) var(--ease),border-color var(--dur) var(--ease),color var(--dur) var(--ease),transform var(--dur) var(--ease);
+}
+.pkg::after{content:'';position:absolute;right:-60px;top:-60px;width:140px;height:140px;background:var(--petrol);transform:rotate(45deg);transition:background-color var(--dur) var(--ease)}
+.pkg.is-active{
+  background:var(--cream);border-color:var(--gold);color:var(--wine-deep);transform:translateY(-4px);
+  box-shadow:0 0 0 1px var(--gold), 0 22px 48px -22px rgba(227,178,91,.65);
+}
+.pkg.is-active::after{background:var(--orange)}
+@media (hover:hover){.pkg:not(.is-active):hover{border-color:var(--pink);transform:translateY(-2px)}}
+.pkg__tag{
+  position:relative;z-index:1;justify-self:start;font-size:.68rem;font-weight:700;letter-spacing:.24em;
+  text-transform:uppercase;padding:.32rem .6rem;border:1px solid currentColor;color:var(--fg-muted);
+}
+.pkg.is-active .pkg__tag{background:var(--wine);border-color:var(--wine);color:var(--cream)}
+.pkg__price{display:flex;align-items:flex-start;line-height:.82;font-family:var(--font-display);font-weight:700}
+.pkg__currency{font-size:var(--step-2);margin-top:.22em;color:var(--gold)}
+.pkg.is-active .pkg__currency{color:var(--wine)}
+.pkg__amount{font-size:clamp(5rem,22vw,9.5rem);letter-spacing:-.05em}
+.pkg__name{font-size:calc(var(--step-2) * 1.15);color:var(--gold-soft);line-height:1}
+.pkg.is-active .pkg__name{color:var(--wine)}
+.pkg__list{display:grid;gap:0;border-top:1px solid currentColor;margin-top:var(--space-2xs);opacity:.92}
+.pkg__row{display:flex;align-items:baseline;gap:.75rem;padding-block:.6rem;border-bottom:1px solid;border-color:color-mix(in srgb,currentColor 22%,transparent);font-size:var(--step-0)}
+.pkg__count{font-family:var(--font-display);font-size:var(--step-1);font-weight:700;min-width:1.2em}
+.pkg__course{text-transform:uppercase;letter-spacing:.12em;font-size:var(--step--1);font-weight:600}
+.pkg__extra{display:flex;align-items:center;gap:.55rem;padding-top:.7rem;font-size:var(--step--1);color:var(--gold)}
+.pkg.is-active .pkg__extra{color:var(--gold-deep)}
+.pkg__extra svg{flex:none;width:18px;height:18px}
+.pkg__mark{position:absolute;top:.75rem;right:.75rem;z-index:1;color:var(--night);opacity:0;transform:scale(.6);transition:opacity var(--dur) var(--ease),transform var(--dur) var(--ease)}
+.pkg.is-active .pkg__mark{opacity:1;transform:none}
+.packages__foot{display:flex;flex-wrap:wrap;align-items:center;gap:var(--space-s);margin-top:var(--space-l);padding-top:var(--space-m);border-top:1px solid var(--rule)}
+.packages__hint{flex:1 1 18rem;color:var(--cream-dim);font-size:var(--step--1)}
+.packages__hint strong{color:var(--cream)}
+@media (min-width:760px){
+  .packages__grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--space-m);align-items:start}
+  .packages__grid > :nth-child(2){margin-top:var(--space-l)}
+  .pkg{padding:var(--space-l) var(--space-m)}
+}
+
+/* ── Menú ────────────────────────────────────────────────── */
+.menu{
+  position:relative;overflow:hidden;
+  padding-block:calc(var(--space-xl) + 34px) var(--space-xl);
+  background:
+    radial-gradient(78% 42% at 50% 0%, rgba(227,178,91,.13), rgba(227,178,91,0) 70%),
+    var(--night);
+}
+.menu > .u-wrap{position:relative;z-index:3}
+.menu__head{margin-bottom:var(--space-m)}
+.menu__title{font-size:var(--step-4);text-transform:uppercase;margin-block:var(--space-2xs) var(--space-xs)}
+.menu__sub{max-width:52ch;color:var(--cream-dim)}
+.menu__tabs{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:var(--space-m);padding-bottom:var(--space-s);border-bottom:1px solid var(--rule)}
+.tab{
+  display:inline-flex;align-items:baseline;gap:.5rem;min-height:var(--tap);
+  padding:.5rem .95rem;background:transparent;border:1px solid var(--rule);color:var(--cream-dim);
+  font-size:var(--step--1);font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  transition:background-color var(--dur) var(--ease),color var(--dur) var(--ease),border-color var(--dur) var(--ease);
+}
+.tab[aria-selected='true']{background:var(--cream);border-color:var(--cream);color:var(--night)}
+@media (hover:hover){.tab:not([aria-selected='true']):hover{border-color:var(--cream-faint);color:var(--cream)}}
+.tab__n{font-family:var(--font-display);font-size:1em}
+.tab__pick{
+  display:inline-grid;place-items:center;min-width:1.45em;height:1.45em;padding-inline:.3em;
+  background:var(--gold);color:var(--night);font-size:.72em;letter-spacing:0;border-radius:999px;
+}
+.tab[aria-selected='true'] .tab__pick{background:var(--wine);color:var(--cream)}
+.tab__pick[hidden]{display:none}
+
+.panel{position:relative;padding:var(--space-m) var(--space-s);background:var(--course-deep);border:1px solid var(--rule)}
+.panel__note{display:flex;flex-wrap:wrap;align-items:baseline;gap:.5rem;margin-bottom:var(--space-m);font-size:var(--step--1);color:var(--cream-dim)}
+.panel__note strong{color:var(--cream);font-weight:700}
+.panel__note em{font-style:normal;color:var(--orange);font-weight:700}
+.grid{display:grid;gap:var(--space-s);grid-template-columns:repeat(auto-fill,minmax(min(100%,13.5rem),1fr))}
+
+.dish{
+  position:relative;display:grid;grid-template-rows:auto 1fr;gap:0;text-align:left;
+  background:var(--night-soft);border:1px solid var(--rule);color:var(--cream);overflow:hidden;padding:0;
+  transition:border-color var(--dur) var(--ease),transform var(--dur) var(--ease),background-color var(--dur) var(--ease);
+}
+@media (hover:hover){.dish:hover{transform:translateY(-3px);border-color:var(--cream-faint)}}
+.dish.is-picked{
+  border-color:var(--gold);background:var(--petrol-deep);
+  box-shadow:0 0 0 1px var(--gold), 0 0 34px -10px rgba(227,178,91,.7);
+}
+.dish__media{position:relative;aspect-ratio:4/5;overflow:hidden;background:var(--petrol-deep)}
+.dish__media img,.dish__media svg{width:100%;height:100%;object-fit:cover;display:block}
+.dish__body{display:grid;gap:.4rem;align-content:start;padding:var(--space-s)}
+.dish__name{font-family:var(--font-sans);font-size:var(--step-0);font-weight:700;line-height:1.28;text-wrap:pretty}
+.dish__tag{font-size:.68rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--cream-faint)}
+.dish__check{
+  position:absolute;top:.6rem;right:.6rem;display:grid;place-items:center;width:34px;height:34px;
+  background:var(--gold);color:var(--night);opacity:0;transform:scale(.55);
+  transition:opacity var(--dur) var(--ease),transform var(--dur) var(--ease);
+}
+.dish.is-picked .dish__check{opacity:1;transform:none}
+.dish__num{
+  position:absolute;left:.55rem;bottom:.45rem;font-family:var(--font-display);font-size:var(--step-2);
+  color:var(--cream);opacity:.55;line-height:1;pointer-events:none;
+}
+
+/* ── Bandeja ─────────────────────────────────────────────── */
+.tray{
+  position:fixed;left:0;right:0;bottom:0;z-index:70;background:var(--cream);color:var(--wine-deep);
+  border-top:2px solid var(--gold);transform:translateY(110%);
+  transition:transform var(--dur-slow) var(--ease);
+}
+.tray.is-up{transform:none}
+.tray__inner{display:flex;flex-wrap:wrap;align-items:center;gap:var(--space-xs) var(--space-m);padding-block:.7rem}
+.tray__count{display:flex;align-items:baseline;gap:.5rem;font-size:var(--step--1);letter-spacing:.1em;text-transform:uppercase;font-weight:700}
+.tray__count b{font-family:var(--font-display);font-size:var(--step-2);line-height:1;color:var(--wine)}
+.tray__bars{display:flex;gap:.35rem;flex:1 1 10rem;min-width:8rem}
+.tray__bar{flex:1;height:6px;background:rgba(78,16,36,.18);position:relative;overflow:hidden}
+.tray__bar i{position:absolute;inset:0;transform-origin:left;background:var(--wine);transition:transform var(--dur) var(--ease)}
+.tray__bar.is-full i{background:var(--gold-deep)}
+.tray__msg{flex:1 1 12rem;font-size:var(--step--1);color:#6b5f52}
+.tray__msg b{color:var(--wine-deep)}
+.tray__cta{margin-left:auto;padding:.7rem 1.2rem;font-size:.7rem}
+
+/* ── Cierre ──────────────────────────────────────────────── */
+.final{
+  position:relative;overflow:hidden;color:var(--night);
+  background:
+    radial-gradient(86% 64% at 50% 6%, rgba(243,239,228,.4), rgba(243,239,228,0) 58%),
+    var(--orange);
+  padding-block:calc(var(--space-xl) + 34px) var(--space-xl);
+}
+.final__pattern{--pattern-ink:var(--wine-deep);--pattern-alpha:.16;--pattern-size:clamp(80px,11vw,116px)}
+.final__inner{position:relative;z-index:3;display:grid;gap:var(--space-m);align-items:center}
+.final__title{font-size:var(--step-4);text-transform:uppercase;margin-bottom:var(--space-m)}
+.final__title em{font-style:normal;color:var(--wine)}
+.final__lines{display:grid;gap:.25rem;margin-bottom:var(--space-m);font-size:var(--step-1);font-weight:300}
+.final__lines li{border-bottom:1px solid rgba(16,16,33,.2);padding-block:.4rem}
+.final__claim{display:grid;margin-bottom:var(--space-m);font-family:var(--font-script);font-size:var(--step-3);line-height:1.05}
+.final__claim-alt{color:var(--wine-deep)}
+.final__actions{display:flex;flex-wrap:wrap;align-items:center;gap:var(--space-s)}
+.final__channel{font-size:var(--step--1);font-weight:600;letter-spacing:.1em}
+.final__art{position:relative;display:flex;justify-content:center;align-items:flex-end}
+.final__tio{width:clamp(180px,42vw,300px);height:auto;filter:drop-shadow(12px 14px 0 rgba(138,30,64,.35))}
+.final__firma{position:absolute;left:0;bottom:0;width:clamp(150px,34vw,230px);height:auto;opacity:.9}
+@media (min-width:900px){
+  .final__inner{grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:var(--space-xl)}
+}
+
+/* ── Pie ─────────────────────────────────────────────────── */
+.foot{position:relative;overflow:hidden;background:var(--night);padding-block:var(--space-xl) var(--space-l);border-top:1px solid var(--rule)}
+.foot__pattern{--pattern-ink:var(--cream);--pattern-alpha:.055;--pattern-size:clamp(76px,10vw,108px)}
+.foot__inner{position:relative;display:grid;gap:var(--space-l)}
+.foot__brand{display:grid;gap:var(--space-s);justify-items:start}
+.foot__logo{width:min(100%,20rem);height:auto}
+.foot__firma{width:min(100%,14rem);height:auto;opacity:.8}
+.foot__data{display:grid;gap:var(--space-m);grid-template-columns:repeat(auto-fit,minmax(min(100%,11rem),1fr));margin:0}
+.foot__data dt{font-size:.68rem;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:var(--cream-faint);margin-bottom:.4rem}
+.foot__data dd{margin:0;font-size:var(--step--1);color:var(--cream-dim);line-height:1.5}
+.foot__data a{color:var(--orange);text-decoration:none;border-bottom:1px solid currentColor}
+.foot__legal{font-size:.78rem;color:var(--cream-faint);max-width:70ch;padding-top:var(--space-s);border-top:1px solid var(--rule)}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.001ms !important;animation-iteration-count:1 !important;transition-duration:.001ms !important;scroll-behavior:auto !important}
+}
+</style>
+
+<a class="u-skip" href="#paquetes">Ir al contenido</a>
+
+<header class="nav">
+  <div class="u-wrap nav__inner">
+    <a href="#portada" aria-label="Tío Navaja, inicio">
+      <img class="nav__logo" src="brand/logo-horizontal-cream.png" alt="Tío Navaja, El Cangrejo" width="760" height="162">
+    </a>
+    <nav class="nav__links" aria-label="Secciones">
+      <a href="#incluido">Incluido</a>
+      <a href="#paquetes">Paquetes</a>
+      <a href="#menu">Menú</a>
+    </nav>
+    <a class="btn btn--primary nav__cta" href="https://wa.me/50763608156" target="_blank" rel="noopener noreferrer">Cotizar</a>
+  </div>
+</header>
+
+<main id="portada">
+  <!-- ── Portada ─────────────────────────────────────────── -->
+  <section class="cover">
+    <span class="pattern pattern--palmera cover__pattern" aria-hidden="true"></span>
+    <div class="garland" data-garland aria-hidden="true"></div>
+
+    <span class="spark" style="width:68px;height:68px;top:13%;left:3%;--tilt:-12deg;animation-delay:-.6s" aria-hidden="true"></span>
+    <span class="spark" style="width:42px;height:42px;top:30%;left:47%;--tilt:9deg;animation-delay:-2.4s" aria-hidden="true"></span>
+    <span class="spark" style="width:56px;height:56px;top:9%;right:7%;--tilt:14deg;animation-delay:-3.6s" aria-hidden="true"></span>
+    <span class="spark" style="width:38px;height:38px;top:53%;left:53%;--tilt:-7deg;animation-delay:-1.5s" aria-hidden="true"></span>
+    <span class="spark" style="width:50px;height:50px;bottom:16%;right:4%;--tilt:6deg;animation-delay:-4.2s" aria-hidden="true"></span>
+
+    <div class="cover__inner u-wrap">
+      <div class="cover__text">
+        <p class="u-kicker cover__eyebrow">El Cangrejo · Ciudad de Panamá</p>
+
+        <h1 class="cover__title">
+          <img class="cover__mark" src="brand/logo-horizontal-cream.png" alt="" width="760" height="162">
+          <span class="cover__navidad">Navidad</span>
+          <span class="u-sr">Navidad en Tío Navaja: menú navideño</span>
+        </h1>
+
+        <p class="cover__lede">Menú de diciembre</p>
+
+        <p class="cover__quote">
+          <span aria-hidden="true" class="cover__quote-mark">“</span>
+          La Navidad panameña no se explica: se sirve. Tamal, guandú, pernil y
+          rosca, alrededor de una misma mesa.
+        </p>
+
+        <div class="cover__actions">
+          <a class="btn btn--primary" href="#paquetes">Ver los dos packs</a>
+          <a class="btn btn--ghost" href="#menu">Explorar el menú</a>
+        </div>
+
+        <p class="cover__meta">Lunes a Sábado · 4:00 p.m. – 12:00 a.m.</p>
+      </div>
+
+      <div class="cover__art" aria-hidden="true">
+        <img class="cover__tio" src="brand/tio.webp" alt="" width="520" height="939">
+        <img class="cover__emc" src="brand/emc-cream.png" alt="" width="520" height="266">
+      </div>
+    </div>
+
+    <div class="cover__ticker" aria-hidden="true">
+      <div class="cover__ticker-track">
+        <span>Cenas de empresa <i>·</i> Nochebuena <i>·</i> Fin de año <i>·</i> Amigo secreto <i>·</i> Reuniones familiares <i>·</i> </span>
+        <span>Cenas de empresa <i>·</i> Nochebuena <i>·</i> Fin de año <i>·</i> Amigo secreto <i>·</i> Reuniones familiares <i>·</i> </span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Incluido en los dos packs ───────────────────────── -->
+  <section class="incl" id="incluido" aria-labelledby="incl-title">
+    <span class="pattern pattern--palmera incl__pattern" aria-hidden="true"></span>
+    <div class="garland" data-garland data-tone="light" aria-hidden="true"></div>
+    <span class="seal" aria-hidden="true">Regalo<br>de la casa</span>
+    <div class="u-wrap incl__inner">
+      <div class="incl__head">
+        <p class="u-kicker">Va en los dos packs</p>
+        <h2 class="incl__title" id="incl-title">Tamal y rosca, <em>de regalo</em></h2>
+        <p class="incl__sub">
+          No se eligen ni se descuentan: elijas el pack que elijas, el tamal y la
+          rosca navideña llegan a la mesa. Son los dos que no pueden faltar en
+          diciembre, y los pone Tío Navaja.
+        </p>
+      </div>
+      <div class="incl__items" id="incl-items"></div>
+    </div>
+  </section>
+
+  <!-- ── Paquetes ────────────────────────────────────────── -->
+  <section class="packages" id="paquetes" aria-labelledby="packages-title">
+    <span class="pattern pattern--palmera packages__pattern" aria-hidden="true"></span>
+    <div class="garland" data-garland aria-hidden="true"></div>
+    <span class="spark" style="width:52px;height:52px;top:12%;left:6%;--tilt:-10deg;animation-delay:-2.1s" aria-hidden="true"></span>
+    <span class="spark" style="width:40px;height:40px;top:24%;right:10%;--tilt:11deg;animation-delay:-4.4s" aria-hidden="true"></span>
+    <div class="u-wrap packages__inner">
+      <header class="packages__head">
+        <p class="u-kicker">Dos formatos</p>
+        <h2 class="packages__title" id="packages-title">Elige tu pack</h2>
+        <p class="packages__sub">
+          Precio por persona. La diferencia entre uno y otro está en las
+          especialidades: el Pack 2 lleva dos platos fuertes a la mesa.
+        </p>
+      </header>
+
+      <div class="packages__grid" role="radiogroup" aria-labelledby="packages-title" id="packs"></div>
+
+      <div class="packages__foot">
+        <p class="packages__hint" id="packs-hint"></p>
+        <a class="btn btn--primary" href="#menu">Armar la mesa</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Menú ────────────────────────────────────────────── -->
+  <section class="menu" id="menu" aria-labelledby="menu-title">
+    <div class="garland" data-garland aria-hidden="true"></div>
+    <div class="u-wrap">
+      <header class="menu__head">
+        <p class="u-kicker">La carta de diciembre</p>
+        <h2 class="menu__title" id="menu-title">Arma tu mesa</h2>
+        <p class="menu__sub">
+          Ve marcando lo que quieres. La bandeja de abajo lleva la cuenta de lo
+          que entra en tu pack; si te pasas del cupo de un tiempo, entra lo
+          nuevo y sale lo más antiguo.
+        </p>
+      </header>
+
+      <div class="menu__tabs" role="tablist" aria-label="Tiempos del menú" id="tabs"></div>
+      <div id="panels"></div>
+    </div>
+  </section>
+
+  <!-- ── Cierre ──────────────────────────────────────────── -->
+  <section class="final" id="cotizar" aria-labelledby="final-title">
+    <span class="pattern pattern--atomo final__pattern" aria-hidden="true"></span>
+    <div class="garland" data-garland data-tone="light" aria-hidden="true"></div>
+
+    <div class="u-wrap final__inner">
+      <div class="final__text">
+        <h2 class="final__title" id="final-title">Diciembre se celebra <em>en la mesa</em></h2>
+
+        <ul class="final__lines">
+          <li>La cena de la empresa.</li>
+          <li>El cierre de año del equipo.</li>
+          <li>La Nochebuena de la familia.</li>
+          <li>El amigo secreto que se alarga.</li>
+        </ul>
+
+        <p class="final__claim">
+          <span>Tío Navaja pone la mesa.</span>
+          <span class="final__claim-alt">Diciembre pone el motivo.</span>
+        </p>
+
+        <div class="final__actions">
+          <a class="btn btn--ink" href="https://wa.me/50763608156" target="_blank" rel="noopener noreferrer">Solicitar cotización</a>
+          <p class="final__channel">WhatsApp 6360-8156</p>
+        </div>
+      </div>
+
+      <div class="final__art" aria-hidden="true">
+        <img class="final__tio" src="brand/tio-oscuro.webp" alt="" width="520" height="939">
+        <img class="final__firma" src="brand/firma-cream.png" alt="" width="720" height="133">
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <span class="pattern pattern--bombilla foot__pattern" aria-hidden="true"></span>
+  <div class="u-wrap foot__inner">
+    <div class="foot__brand">
+      <img class="foot__logo" src="brand/logo-horizontal-cream.png" alt="Tío Navaja, El Cangrejo" width="760" height="162">
+      <img class="foot__firma" src="brand/firma-cream.png" alt="" width="720" height="133">
+    </div>
+
+    <dl class="foot__data">
+      <div>
+        <dt>Dónde</dt>
+        <dd>Calle Arturo Motta, El Cangrejo — frente a la Cabeza de Einstein<br>Ciudad de Panamá</dd>
+      </div>
+      <div>
+        <dt>Horario</dt>
+        <dd>Lunes a Sábado · 4:00 p.m. – 12:00 a.m.</dd>
+      </div>
+      <div>
+        <dt>Cotizaciones</dt>
+        <dd><a href="https://wa.me/50763608156" target="_blank" rel="noopener noreferrer">WhatsApp 6360-8156</a></dd>
+      </div>
+      <div>
+        <dt>Web</dt>
+        <dd><a href="https://tionavaja.com" target="_blank" rel="noopener noreferrer">tionavaja.com</a></dd>
+      </div>
+    </dl>
+
+    <p class="foot__legal">
+      Menú navideño. Los platos y los precios son los entregados por el
+      restaurante. Fechas disponibles, mínimo de personas, impuestos y
+      condiciones de servicio se confirman al cotizar.
+    </p>
+  </div>
+</footer>
+
+<div class="tray" id="tray" aria-live="polite">
+  <div class="u-wrap tray__inner">
+    <p class="tray__count"><b id="tray-n">0</b> <span>de <span id="tray-total">6</span> elegidos</span></p>
+    <div class="tray__bars" id="tray-bars" aria-hidden="true"></div>
+    <p class="tray__msg" id="tray-msg"></p>
+    <a class="btn btn--ink tray__cta" href="https://wa.me/50763608156" target="_blank" rel="noopener noreferrer">Cotizar</a>
+  </div>
+</div>
+
+<script>
+(() => {
+  'use strict'
+
+  /* =======================================================
+     La guirnalda
+     Cada vano son 118 px, así que el número de bombillos
+     depende del ancho: se arma aquí y se rehace al
+     redimensionar. Cada bombillo titila con su propio
+     desfase para que la ristra nunca parpadee a la vez.
+     ======================================================= */
+  const SWAG = 118
+  const BULBS = {
+    dark:  [['#e3b25b','rgba(227,178,91,.55)'], ['#ff8040','rgba(255,128,64,.5)'],
+            ['#f5abb8','rgba(245,171,184,.45)'], ['#f3efe4','rgba(243,239,228,.4)']],
+    light: [['#8a1e40','transparent'], ['#004c45','transparent'],
+            ['#b8893c','transparent'], ['#101021','transparent']],
+  }
+
+  function buildGarlands() {
+    document.querySelectorAll('[data-garland]').forEach(g => {
+      const width = g.offsetWidth || window.innerWidth
+      const n = Math.ceil(width / SWAG) + 1
+      if (g.childElementCount === n) return
+      const palette = BULBS[g.dataset.tone === 'light' ? 'light' : 'dark']
+      const frag = document.createDocumentFragment()
+      for (let i = 0; i < n; i++) {
+        const swag = document.createElement('span')
+        swag.className = 'swag'
+        swag.innerHTML = '<svg viewBox="0 0 118 44" aria-hidden="true"><path d="M0 5 Q59 42 118 5"/></svg>'
+        const bulb = document.createElement('span')
+        bulb.className = 'bulb'
+        const [color, glow] = palette[i % palette.length]
+        bulb.style.setProperty('--b', color)
+        bulb.style.setProperty('--b-glow', glow)
+        // 7 y 4 son primos entre sí: el ciclo no se repite con el color
+        bulb.style.animationDelay = `${-(i % 7) * 0.44}s`
+        swag.appendChild(bulb)
+        frag.appendChild(swag)
+      }
+      g.replaceChildren(frag)
+    })
+  }
+
+  buildGarlands()
+
+  let resizeTimer
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer)
+    resizeTimer = setTimeout(buildGarlands, 160)
+  })
+
+  /* =======================================================
+     Datos — tal cual los entregó el cliente en el brochure.
+     No se inventan descripciones, fechas ni mínimos.
+     ======================================================= */
+  const COURSES = [
+    { id: 'entrada',      label: 'Entradas',       one: 'entrada',      many: 'entradas' },
+    { id: 'especialidad', label: 'Especialidades', one: 'especialidad', many: 'especialidades' },
+    { id: 'guarnicion',   label: 'Guarniciones',   one: 'guarnición',   many: 'guarniciones' },
+    { id: 'postre',       label: 'Postres',        one: 'postre',       many: 'postres' },
+  ]
+
+  const PACKS = [
+    { id: 'p40', price: '40', name: 'La mesa de diciembre',
+      counts: { entrada: 1, especialidad: 1, guarnicion: 2, postre: 2 } },
+    { id: 'p50', price: '50', name: 'La mesa de Nochebuena',
+      counts: { entrada: 1, especialidad: 2, guarnicion: 2, postre: 2 } },
+  ]
+
+  const DISHES = [
+    // Entradas
+    { id: 'canoas',      name: 'Canoas de Tamal de Olla con Pork Belly',        course: 'entrada',      art: 'tamal' },
+    { id: 'carimanolas', name: 'Mini Carimañolas Rellenas de Queso del País',   course: 'entrada',      art: 'croqueta', photo: 'photos/carimanola.webp' },
+    { id: 'empanadas',   name: 'Empanadas de Maíz Rellenas de Pollo',           course: 'entrada',      art: 'empanada' },
+    { id: 'canastitas',  name: 'Canastitas de Patacones con Cóctel de Camarones', course: 'entrada',    art: 'canastita' },
+    // Especialidades
+    { id: 'pernil',      name: 'Pernil de Cerdo al Horno Glaseado con Piña y Especias', course: 'especialidad', art: 'pernil' },
+    { id: 'roulade',     name: 'Roulade de Pollo',                              course: 'especialidad', art: 'roulade' },
+    { id: 'jamon',       name: 'Jamón Ahumado con Salsa de Guayaba y Pecans',   course: 'especialidad', art: 'jamon' },
+    { id: 'pavo',        name: 'Pavo al Horno con Relleno Criollo',             course: 'especialidad', art: 'pavo' },
+    { id: 'brisket',     name: 'Brisket Glaseado',                              course: 'especialidad', art: 'brisket' },
+    // Guarniciones
+    { id: 'feria',       name: 'Ensalada Feria',                                course: 'guarnicion',   art: 'verde' },
+    { id: 'pastelon',    name: 'Pastelón de Plátano Maduro',                    course: 'guarnicion',   art: 'pastelon' },
+    { id: 'guandu',      name: 'Arroz con Guandú',                              course: 'guarnicion',   art: 'arroz' },
+    { id: 'salvaje',     name: 'Arroz Salvaje con Guandú y Especias',           course: 'guarnicion',   art: 'arroz' },
+    { id: 'gallina',     name: 'Ensalada de Gallina',                           course: 'guarnicion',   art: 'guarnicion' },
+    { id: 'tentacion',   name: 'Plátano en Tentación',                          course: 'guarnicion',   art: 'platano' },
+    // Postres
+    { id: 'flan',        name: 'Flan de Coco',                                  course: 'postre',       art: 'dulce', photo: 'photos/flan.webp' },
+    { id: 'dulcefrutas', name: 'Dulce de Frutas Navideño',                      course: 'postre',       art: 'copa' },
+    { id: 'cake',        name: 'Cake de Frutas Navideños',                      course: 'postre',       art: 'dulce' },
+    { id: 'cheesecake',  name: 'Cheesecake de Maracuyá o Café',                 course: 'postre',       art: 'cheesecake', photo: 'photos/cheesecake.webp' },
+  ]
+
+  /* =======================================================
+     Lámina ilustrada — el mismo sistema del brochure
+     corporativo, con motivos nuevos dibujados para los
+     platos de diciembre (tamal, pernil, pavo, rosca…).
+     ======================================================= */
+  const PALETTES = {
+    entrada: [
+      { bg:'#004c45', shape:'#00312c', shape2:'#ff8040', line:'#f3efe4', num:'#0a655b' },
+      { bg:'#00312c', shape:'#0a655b', shape2:'#8a1e40', line:'#f3efe4', num:'#004c45' },
+    ],
+    especialidad: [
+      { bg:'#8a1e40', shape:'#4e1024', shape2:'#ff8040', line:'#f3efe4', num:'#a13a58' },
+      { bg:'#4e1024', shape:'#8a1e40', shape2:'#004c45', line:'#f3efe4', num:'#6b1731' },
+    ],
+    guarnicion: [
+      { bg:'#0a655b', shape:'#004c45', shape2:'#f5abb8', line:'#f3efe4', num:'#00312c' },
+      { bg:'#004c45', shape:'#00312c', shape2:'#f5abb8', line:'#f3efe4', num:'#0a655b' },
+    ],
+    postre: [
+      { bg:'#ff8040', shape:'#8a1e40', shape2:'#f3efe4', line:'#101021', num:'#ff9a63' },
+      { bg:'#f5abb8', shape:'#8a1e40', shape2:'#ff8040', line:'#101021', num:'#f8bfc9' },
+    ],
+  }
+
+  const MOTIF = {
+    // Tamal envuelto y amarrado — el que va incluido en los dos packs
+    tamal: `<rect x="92" y="236" width="216" height="104" rx="52"/>
+            <path d="M148 236v104M252 236v104"/>
+            <path d="M92 288c-26-8-42-26-46-46M308 288c26-8 42-26 46-46"/>`,
+    // Rosca navideña: corona trenzada
+    rosca: `<circle cx="200" cy="286" r="98"/><circle cx="200" cy="286" r="46"/>
+            <path d="M200 188v52M249 199l-26 45M287 237l-45 26M298 286h-52M287 335l-45-26M249 373l-26-45M200 384v-52M151 373l26-45M113 335l45-26M102 286h52M113 237l45 26M151 199l26 45"/>`,
+    empanada: `<path d="M100 320c0-58 45-104 100-104s100 46 100 104Z"/>
+               <path d="M100 320h200" stroke-dasharray="12 12"/>
+               <path d="M150 252c20-14 44-16 66-6"/>`,
+    canastita: `<path d="M126 256h148l-18 94c-2 12-12 20-24 20h-64c-12 0-22-8-24-20Z"/>
+                <path d="M110 256h180"/>
+                <path d="M164 232c10-20 38-22 50-6 8 12 0 26-14 26"/>
+                <path d="M212 216c8-14 26-14 32-2"/>`,
+    croqueta: `<rect x="106" y="278" width="126" height="62" rx="31" transform="rotate(-8 169 309)"/>
+               <rect x="182" y="222" width="126" height="62" rx="31" transform="rotate(10 245 253)"/>
+               <circle cx="146" cy="216" r="12"/><circle cx="188" cy="190" r="8"/>`,
+    // Pernil: el motivo 'plato' de la casa, el mismo del brochure corporativo
+    pernil: `<circle cx="200" cy="286" r="112"/>
+             <path d="M146 268c18-30 60-40 92-20 26 16 30 52 6 70-28 20-76 12-98-14Z"/>
+             <path d="M138 336c34 14 90 14 124-4" stroke-dasharray="6 14"/>`,
+    // Roulade: la espiral del enrollado
+    roulade: `<circle cx="200" cy="286" r="94"/>
+              <path d="M200 286a26 26 0 0 1 26-26 52 52 0 0 1 52 52 78 78 0 0 1-78 78"/>
+              <path d="M96 392h208" stroke-dasharray="8 14"/>`,
+    // Jamón glaseado con el marcado en rombos
+    jamon: `<path d="M114 322c0-66 38-114 86-114s86 48 86 114Z"/>
+            <path d="M114 322h172"/>
+            <path d="M148 264l42 44M190 264l42 44M148 308l42-44M190 308l42-44"/>
+            <circle cx="200" cy="192" r="10"/>`,
+    // Pavo: el motivo 'ala' de la casa — el de ave del brochure corporativo
+    pavo: `<path d="M130 344c-16-58 14-118 74-138 44-14 74 10 72 44-2 40-40 52-62 84-16 22-16 40-16 40Z"/>
+           <path d="M198 340c22 14 48 10 62-8"/>
+           <circle cx="146" cy="352" r="16"/>`,
+    // Brisket: el corte en lonjas
+    brisket: `<path d="M104 268h192v58c0 14-12 24-28 24H132c-16 0-28-10-28-24Z"/>
+              <path d="M104 268c0-28 43-48 96-48s96 20 96 48"/>
+              <path d="M144 268v82M184 268v82M224 268v82M264 268v82"/>`,
+    verde: `<path d="M100 262h200c-8 58-48 92-100 92s-92-34-100-92Z"/>
+            <ellipse cx="164" cy="222" rx="42" ry="24" transform="rotate(-24 164 222)"/>
+            <ellipse cx="240" cy="230" rx="38" ry="22" transform="rotate(20 240 230)"/>
+            <path d="M206 210v46"/>`,
+    // Pastelón: el bloque en capas
+    pastelon: `<rect x="104" y="238" width="192" height="112" rx="10"/>
+               <path d="M104 276h192M104 312h192"/>
+               <path d="M132 238c18-20 44-26 68-18"/>`,
+    arroz: `<path d="M112 334c0-62 40-112 88-112s88 50 88 112Z"/>
+            <path d="M112 334h176"/>
+            <path d="M156 290h14M196 262h14M232 300h14M182 312h14M214 318h14"/>`,
+    guarnicion: `<path d="M116 274h168c-6 52-40 82-84 82s-78-30-84-82Z"/>
+                 <circle cx="164" cy="240" r="26"/><circle cx="222" cy="232" r="22"/><circle cx="196" cy="276" r="18"/>`,
+    // Plátano en tentación: la media luna en su almíbar
+    platano: `<path d="M122 326c-18-56 14-114 70-132 30-10 56 2 64 24"/>
+              <path d="M160 326c-14-40 10-84 50-98 22-8 40 0 46 14"/>
+              <path d="M122 326c10 16 30 16 38 0"/>
+              <path d="M256 218c8-12 22-14 32-6"/>
+              <path d="M100 366h200" stroke-dasharray="10 14"/>`,
+    dulce: `<path d="M120 350 200 190l80 160Z"/><path d="M152 286h96"/>
+            <path d="M104 350h192"/><circle cx="200" cy="216" r="12"/>`,
+    copa: `<path d="M126 236h148c0 54-33 92-74 92s-74-38-74-92Z"/>
+           <path d="M200 328v48M162 376h76"/>
+           <path d="M140 236c26-22 54 14 82-6s38 6 52-2"/>
+           <circle cx="230" cy="196" r="14"/><path d="M230 182c6-14 18-18 26-16"/>`,
+    cheesecake: `<path d="M120 336 200 206l80 130Z"/><path d="M136 310h128"/>
+                 <path d="M104 336h192"/><circle cx="200" cy="238" r="10"/>`,
+  }
+
+  /** Hash estable: el mismo plato recibe siempre la misma composición. */
+  const hash = (seed) => {
+    let h = 2166136261
+    for (let i = 0; i < seed.length; i++) { h ^= seed.charCodeAt(i); h = Math.imul(h, 16777619) }
+    return Math.abs(h)
+  }
+
+  const backdrop = (v, p) => ([
+    `<circle cx="330" cy="120" r="150" fill="${p.shape}"/><path d="M0 400h400v100H0z" fill="${p.shape2}" opacity=".9"/>`,
+    `<path d="M0 0h260L0 320Z" fill="${p.shape}"/><circle cx="322" cy="418" r="104" fill="${p.shape2}" opacity=".9"/>`,
+    `<rect x="40" y="60" width="320" height="380" fill="${p.shape}"/><path d="M400 0v180L230 0Z" fill="${p.shape2}" opacity=".9"/>`,
+    `<ellipse cx="200" cy="300" rx="210" ry="180" fill="${p.shape}"/><path d="M0 0h140v70H0z" fill="${p.shape2}" opacity=".9"/>`,
+  ][v])
+
+  /** Dibuja la lámina de un plato. `index` numera dentro de su tiempo. */
+  function laminaSVG(id, course, art, index) {
+    const h = hash(id)
+    const pal = PALETTES[course]
+    const p = pal[h % pal.length]
+    const v = (h >> 3) % 4
+    const tilt = ((h >> 5) % 5) - 2
+    return `<svg viewBox="0 0 400 500" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">
+      <rect width="400" height="500" fill="${p.bg}"/>
+      ${backdrop(v, p)}
+      <text x="28" y="452" font-family="Georgia, 'Times New Roman', serif" font-size="190" font-weight="700" fill="${p.num}" opacity=".55">${String(index + 1).padStart(2, '0')}</text>
+      <g transform="rotate(${tilt} 200 280)" fill="none" stroke="${p.line}" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">${MOTIF[art] || MOTIF.dulce}</g>
+      <rect x="16" y="16" width="368" height="468" fill="none" stroke="${p.line}" stroke-width="2" opacity=".5"/>
+    </svg>`
+  }
+
+  /* =======================================================
+     Lo incluido: tamal y rosca, con su propia lámina
+     ======================================================= */
+  const INCLUDED = [
+    { id: 'tamal-incluido', art: 'tamal', name: 'Tamal',           note: 'De olla, envuelto en hoja.' },
+    { id: 'rosca-incluida', art: 'rosca', name: 'Rosca Navideña',  note: 'Para cerrar la mesa.' },
+  ]
+
+  document.getElementById('incl-items').innerHTML = INCLUDED.map((it, i) => `
+    <div class="incl__item">
+      ${laminaSVG(it.id, i === 0 ? 'entrada' : 'guarnicion', it.art, i)}
+      <p class="incl__name">${it.name}</p>
+      <p class="incl__note">${it.note}</p>
+    </div>`).join('')
+
+  /* =======================================================
+     Estado
+     ======================================================= */
+  const byCourse = {}
+  COURSES.forEach(c => { byCourse[c.id] = DISHES.filter(d => d.course === c.id) })
+
+  let packId = PACKS[0].id
+  /** Selección por tiempo, en orden de llegada. */
+  const picked = { entrada: [], especialidad: [], guarnicion: [], postre: [] }
+  let activeTab = COURSES[0].id
+  let lastMsg = ''
+
+  const pack = () => PACKS.find(p => p.id === packId)
+  const allowance = (courseId) => pack().counts[courseId]
+  const totalAllowance = () => COURSES.reduce((n, c) => n + allowance(c.id), 0)
+  const totalPicked = () => COURSES.reduce((n, c) => n + picked[c.id].length, 0)
+  const label = (c, n) => `${n} ${n === 1 ? c.one : c.many}`
+
+  /* =======================================================
+     Paquetes
+     ======================================================= */
+  const packsEl = document.getElementById('packs')
+  const check = `<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M4 12.5 9.5 18 20 6.5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>`
+  const bulb = `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a6 6 0 0 0-3.6 10.8V17h7.2v-3.2A6 6 0 0 0 12 3Z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M9.6 20h4.8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>`
+
+  packsEl.innerHTML = PACKS.map((p, i) => `
+    <button type="button" role="radio" id="pack-${p.id}" data-pack="${p.id}"
+            aria-checked="${i === 0}" tabindex="${i === 0 ? 0 : -1}"
+            class="pkg${i === 0 ? ' is-active' : ''}">
+      <span class="pkg__tag">${i === 0 ? 'Seleccionado' : 'Elegir'}</span>
+      <span class="pkg__price">
+        <span class="pkg__currency" aria-hidden="true">$</span>
+        <span class="pkg__amount">${p.price}</span>
+        <span class="u-sr">Pack ${i + 1}: ${p.price} dólares por persona</span>
+      </span>
+      <span class="pkg__name u-script">${p.name}</span>
+      <span class="pkg__list">
+        ${COURSES.map(c => `
+          <span class="pkg__row">
+            <span class="pkg__count">${p.counts[c.id]}</span>
+            <span class="pkg__course">${p.counts[c.id] === 1 ? c.one : c.many}</span>
+          </span>`).join('')}
+      </span>
+      <span class="pkg__extra">${bulb} Tamal y Rosca Navideña incluidos</span>
+      <span class="pkg__mark" aria-hidden="true">${check}</span>
+    </button>`).join('')
+
+  const packButtons = [...packsEl.querySelectorAll('.pkg')]
+
+  packButtons.forEach((btn, i) => {
+    btn.addEventListener('click', () => setPack(btn.dataset.pack))
+    btn.addEventListener('keydown', (e) => {
+      const keys = ['ArrowRight', 'ArrowDown', 'ArrowLeft', 'ArrowUp']
+      if (!keys.includes(e.key)) return
+      e.preventDefault()
+      const fwd = e.key === 'ArrowRight' || e.key === 'ArrowDown'
+      const next = (i + (fwd ? 1 : -1) + PACKS.length) % PACKS.length
+      setPack(PACKS[next].id)
+      packButtons[next].focus()
+    })
+  })
+
+  function setPack(id) {
+    if (id === packId) return
+    packId = id
+    // Si el pack nuevo admite menos de un tiempo, se recorta lo más antiguo.
+    COURSES.forEach(c => {
+      const max = allowance(c.id)
+      while (picked[c.id].length > max) picked[c.id].shift()
+    })
+    lastMsg = ''
+    packButtons.forEach(btn => {
+      const on = btn.dataset.pack === packId
+      btn.classList.toggle('is-active', on)
+      btn.setAttribute('aria-checked', String(on))
+      btn.tabIndex = on ? 0 : -1
+      btn.querySelector('.pkg__tag').textContent = on ? 'Seleccionado' : 'Elegir'
+    })
+    renderAll()
+  }
+
+  /* =======================================================
+     Pestañas y paneles del menú
+     ======================================================= */
+  const tabsEl = document.getElementById('tabs')
+  const panelsEl = document.getElementById('panels')
+
+  tabsEl.innerHTML = COURSES.map((c, i) => `
+    <button type="button" role="tab" class="tab" id="tab-${c.id}"
+            aria-controls="panel-${c.id}" aria-selected="${i === 0}" tabindex="${i === 0 ? 0 : -1}"
+            data-course="${c.id}">
+      <span class="tab__n">${String(i + 1).padStart(2, '0')}</span>
+      <span>${c.label}</span>
+      <span class="tab__pick" data-pick="${c.id}" hidden></span>
+    </button>`).join('')
+
+  panelsEl.innerHTML = COURSES.map((c, i) => `
+    <div role="tabpanel" class="panel" id="panel-${c.id}" aria-labelledby="tab-${c.id}"
+         data-course="${c.id}" tabindex="0"${i === 0 ? '' : ' hidden'}>
+      <p class="panel__note">
+        <span>Tu pack incluye <strong data-note="${c.id}"></strong>.</span>
+        <em data-state="${c.id}"></em>
+      </p>
+      <div class="grid">
+        ${byCourse[c.id].map((d, j) => `
+          <button type="button" class="dish" data-dish="${d.id}" aria-pressed="false">
+            <span class="dish__media">
+              ${d.photo
+                ? `<img src="${d.photo}" alt="${d.name}, del menú navideño de Tío Navaja" loading="lazy" decoding="async" width="400" height="500">`
+                : laminaSVG(d.id, d.course, d.art, j)}
+              ${d.photo ? `<span class="dish__num" aria-hidden="true">${String(j + 1).padStart(2, '0')}</span>` : ''}
+              <span class="dish__check" aria-hidden="true">${check}</span>
+            </span>
+            <span class="dish__body">
+              <span class="dish__name">${d.name}</span>
+              <span class="dish__tag">${c.one}</span>
+            </span>
+          </button>`).join('')}
+      </div>
+    </div>`).join('')
+
+  const tabButtons = [...tabsEl.querySelectorAll('.tab')]
+
+  tabButtons.forEach((btn, i) => {
+    btn.addEventListener('click', () => selectTab(btn.dataset.course))
+    btn.addEventListener('keydown', (e) => {
+      let next = null
+      if (e.key === 'ArrowRight' || e.key === 'ArrowDown') next = (i + 1) % COURSES.length
+      else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') next = (i - 1 + COURSES.length) % COURSES.length
+      else if (e.key === 'Home') next = 0
+      else if (e.key === 'End') next = COURSES.length - 1
+      if (next === null) return
+      e.preventDefault()
+      selectTab(COURSES[next].id)
+      tabButtons[next].focus()
+    })
+  })
+
+  function selectTab(id) {
+    activeTab = id
+    tabButtons.forEach(btn => {
+      const on = btn.dataset.course === id
+      btn.setAttribute('aria-selected', String(on))
+      btn.tabIndex = on ? 0 : -1
+    })
+    COURSES.forEach(c => {
+      document.getElementById(`panel-${c.id}`).hidden = c.id !== id
+    })
+  }
+
+  /* =======================================================
+     Elegir platos
+     ======================================================= */
+  panelsEl.addEventListener('click', (e) => {
+    const btn = e.target.closest('.dish')
+    if (!btn) return
+    const dish = DISHES.find(d => d.id === btn.dataset.dish)
+    const list = picked[dish.course]
+    const courseDef = COURSES.find(c => c.id === dish.course)
+    const at = list.indexOf(dish.id)
+
+    if (at > -1) {
+      list.splice(at, 1)
+      lastMsg = ''
+    } else {
+      list.push(dish.id)
+      if (list.length > allowance(dish.course)) {
+        const out = list.shift()
+        const gone = DISHES.find(d => d.id === out)
+        lastMsg = `Tu pack lleva ${label(courseDef, allowance(dish.course))}: entró <b>${dish.name}</b> y salió <b>${gone.name}</b>.`
+      } else {
+        lastMsg = ''
+      }
+    }
+    renderAll()
+  })
+
+  /* =======================================================
+     Bandeja y estado
+     ======================================================= */
+  const tray = document.getElementById('tray')
+  const trayN = document.getElementById('tray-n')
+  const trayTotal = document.getElementById('tray-total')
+  const trayBars = document.getElementById('tray-bars')
+  const trayMsg = document.getElementById('tray-msg')
+  const packsHint = document.getElementById('packs-hint')
+
+  trayBars.innerHTML = COURSES.map(c => `<span class="tray__bar" data-bar="${c.id}"><i></i></span>`).join('')
+
+  function renderAll() {
+    // Tarjetas
+    document.querySelectorAll('.dish').forEach(btn => {
+      const dish = DISHES.find(d => d.id === btn.dataset.dish)
+      const on = picked[dish.course].includes(dish.id)
+      btn.classList.toggle('is-picked', on)
+      btn.setAttribute('aria-pressed', String(on))
+    })
+
+    // Avisos por tiempo + contador en la pestaña
+    COURSES.forEach(c => {
+      const max = allowance(c.id)
+      const n = picked[c.id].length
+      document.querySelector(`[data-note="${c.id}"]`).textContent = label(c, max)
+      const state = document.querySelector(`[data-state="${c.id}"]`)
+      state.textContent = n === 0 ? '' : n < max ? `Llevas ${n} · te falta${max - n === 1 ? '' : 'n'} ${max - n}` : 'Completo'
+      const pick = document.querySelector(`[data-pick="${c.id}"]`)
+      pick.hidden = n === 0
+      pick.textContent = `${n}/${max}`
+      const bar = document.querySelector(`[data-bar="${c.id}"]`)
+      bar.classList.toggle('is-full', n >= max)
+      bar.querySelector('i').style.transform = `scaleX(${max ? Math.min(n / max, 1) : 0})`
+    })
+
+    // Bandeja
+    const n = totalPicked(), max = totalAllowance()
+    trayN.textContent = n
+    trayTotal.textContent = max
+    tray.classList.toggle('is-up', n > 0)
+    document.body.style.paddingBottom = n > 0 ? '5.5rem' : ''
+    if (lastMsg) trayMsg.innerHTML = lastMsg
+    else if (n === 0) trayMsg.textContent = ''
+    else if (n < max) trayMsg.innerHTML = `Te faltan <b>${max - n}</b> para completar el pack $${pack().price}.`
+    else trayMsg.innerHTML = `Mesa completa. Mándanosla por WhatsApp y te cotizamos.`
+
+    // Pie de los paquetes
+    packsHint.innerHTML = `Vas con el <strong>Pack $${pack().price} — ${pack().name}</strong>: ` +
+      COURSES.map(c => label(c, allowance(c.id))).join(', ') + ', más el tamal y la rosca de la casa.'
+  }
+
+  renderAll()
+})()
+</script>
